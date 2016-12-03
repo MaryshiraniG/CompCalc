@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Complex Calculator</title>
+</head>
+<body>
+<script type="text/javascript"/>
+function calc_01()
+{
+	var str = document.getElementById('textbox').value;
+	var l = str.length;
+	var myarray = str.split(/(\d+)/).filter(Boolean);
+	var myarraylen = myarray.length;
+	if (myarraylen < 3)
+  	{
+  		alert("Invalid Input - Please enter valid data");
+  		return;
+  	}
+
+  	if (isNaN(myarray[0]) || isNaN(myarray[myarraylen]))
+  	{
+  		alert("Invalid Input - First and last character should be numeric");
+  		return;
+  	}
+ 	for (i=0;i<=myarraylen;i=i+2)
+ 	{
+  		if (isNaN(myarray[i]))
+  		{
+  			alert("Invalid Input - Non numeric data entered after operator");
+  			return;
+  		}
+   	}
+   	for(i=1; i<myarraylen; i = i +2)
+  	{
+  		if ((myarray[i] !== '+') && (myarray[i] !== '-') && (myarray[i] !== '*') && (myarray[i] !== '/') )
+  		{
+  		alert ("Invalid operator");
+  		return;
+  		}
+  	}
+  	var i=0; 
+  	var tot ;
+  	var val1;
+  	var val2;
+  	var oper;
+  	var totprev;
+  	var html = "Please find the results below: <br />";
+  	do
+   	{	
+   		if (i == 0)
+   		{
+  			val1 = parseInt(myarray[i]);
+  			i=i+1;
+  			oper = myarray[i];
+  			i=i+1;
+  			val2 = parseInt(myarray[i]);
+  			i=i+1
+  			switch (oper)
+  			{
+   				case '+':	tot = add(val1,val2);		
+   				html += ("Output : " + val1 + oper + val2  + "=" + tot + "<br />");
+   				break;
+  				case '-':	tot = sub(val1,val2);		
+  				html += ("Output : " + val1 + oper + val2  + "=" + tot + "<br />");
+  				break;
+  				case '*':	tot = mul(val1,val2);		
+  				html += ("Output : " + val1 + oper + val2  + "=" + tot + "<br />");
+  				break;
+  				case '/':	tot = div(val1,val2);		
+  				html += ("Output : " + val1 + oper + val2  + "=" + tot + "<br />");
+  				break;
+   			}
+   		}
+   		else
+   		{
+   			oper = myarray[i];
+  			i=i+1;
+  			val2 = parseInt(myarray[i]);
+  			i=i+1
+  			totprev = tot;
+  			console.log (totprev);
+  			switch (oper)
+  			{
+   				case '+':	tot = add(tot,val2);		
+   				html += ("Output : " + totprev + oper + val2  + "=" + tot + "<br />");
+  				break;
+  				case '-':	tot = sub(tot,val2);		
+  				html += ("Output : " + totprev + oper + val2  + "=" + tot + "<br />");
+  				break;
+  				case '*':	tot = mul(tot,val2);		
+  				html += ("Output : " + totprev + oper + val2  + "=" + tot + "<br />");
+  				break;
+  				case '/':	tot = div(tot,val2);		
+  				html += ("Output : " + totprev + oper + val2  + "=" + tot + "<br />");
+  				break;
+   			}
+   		}
+   		//console.log (myarraylen);
+   		//console.log (i);
+  	}
+
+   	while(i < myarraylen);
+  	
+  	function add(a,b)
+	{
+		var c = a + b;
+		return c;
+		alert("hi");
+	}
+	function sub(a,b)
+	{
+		var c = a - b
+		return c;
+	}
+	function mul(a,b)
+	{
+		var c = a * b;
+		return c;
+	}
+	function div(a,b)
+	{
+		var c = a/b; 
+		return c;
+	}
+
+  
+	//document.write (str + "<br />");
+	//document.write (l + "<br />");
+	//document.write (myarray + "<br />");
+	//document.write (myarraylen + "<br />");
+	document.getElementById('display').innerHTML = html;
+}
+</script>
+<Form>
+Enter Values: <input type="text" id="textbox"> <br>
+</Form>
+<input type="button" onclick="calc_01();" name="ok" value="Calculate"/>
+<p><span id='display'></span></p>
+</body>
+</html>
