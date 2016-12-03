@@ -17,7 +17,7 @@ function calc_01()
   		return;
   	}
 
-  	if (isNaN(myarray[0]) || isNaN(myarray[myarraylen]))
+  	if (isNaN(myarray[0]) && isNaN(myarray[myarraylen]))
   	{
   		alert("Invalid Input - First and last character should be numeric");
   		return;
